@@ -1,13 +1,3 @@
-:HIDDEN:
-#+CATEGORY: guix
-#+PROPERTY: header-args :results silent :tangle ./guix-config.scm
-:END:
-#+TITLE: Guix Configuration
-
-* Guix Configuration
-** Packages
-Declaring packages to install on user profile
- #+BEGIN_SRC scheme
 (define-module (packages)
   #:export (emacs-packages
             ))
@@ -19,9 +9,7 @@ Declaring packages to install on user profile
    ))
 
 ;;; packages.scm ends here
- #+END_SRC
-** Utils
-#+BEGIN_SRC scheme
+
 (define-module (al guix utils)
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1)
@@ -136,4 +124,3 @@ This is a plural form of `specification->package'."
                             " ")))
 
 ;;; utils.scm ends here
-#+END_SRC
