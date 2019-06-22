@@ -1,11 +1,20 @@
 (define-module (packages)
-  #:export (emacs-packages
+  #:export (misc-packages
+            emacs-packages
             ))
 
 (define emacs-packages
   ;; Emacs packages, but not Emacs itself.
   (specifications->packages
    "emacs-ivy"
+   ))
+
+(define misc-packages
+  (specifications->packages
+   "git"
+   "curl"
+   "gnupg"
+   "wget"
    ))
 
 ;;; packages.scm ends here
