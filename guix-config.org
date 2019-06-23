@@ -12,7 +12,7 @@ Declaring packages to install on user profile
 (packages
  (append
   (list
-  (specifications->packages
+   (specification->package
   "emacs-ivy"))))
 
 ;;; packages.scm ends here

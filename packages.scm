@@ -3,7 +3,7 @@
 (packages
  (append
   (list
-  (specifications->packages
+   (specification->package
   "emacs-ivy"))))
 
 ;;; packages.scm ends here
