@@ -8,7 +8,7 @@
 (packages->manifest
  (list emacs
        emacs-a
-       emacs-all-the-icons-ivy
+;       emacs-all-the-icons-ivy
        emacs-anzu
        emacs-auto-yasnippet
        emacs-beacon
