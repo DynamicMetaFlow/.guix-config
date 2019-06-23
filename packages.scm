@@ -22,8 +22,8 @@
 
 ;;; Code:
 
-(define-module (Public guix packages)
-  #:use-module (Public guix utils)
+(define-module (Public packages)
+  #:use-module (Public utils)
   #:export (build-common-packages
             build-guix-packages
             emacs-packages
