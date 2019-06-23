@@ -97,9 +97,11 @@
                 emacs-auto-yasnippet
                 emacs-htmlize
                 emacs-base16-theme
+                emacs-alert
                 )))
 
 ;;; MANIFEST
 ;;; ========
 
   (packages->manifest (map specification->package packages))
+  (packages->manifest emacs)

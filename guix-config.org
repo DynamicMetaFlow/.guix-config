@@ -107,12 +107,14 @@ Declaring packages to install on user profile
                 emacs-auto-yasnippet
                 emacs-htmlize
                 emacs-base16-theme
+                emacs-alert
                 )))
 
 ;;; MANIFEST
 ;;; ========
 
   (packages->manifest (map specification->package packages))
+  (packages->manifest emacs)
 
 #+END_SRC
 * Packages to build from source
