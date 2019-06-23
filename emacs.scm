@@ -35,7 +35,6 @@
        emacs-discover-my-major
        emacs-helpful
        emacs-better-defaults
-       emacs-hlinum
        emacs-visual-fill-column
        emacs-ace-window
        emacs-transpose-frame
@@ -75,6 +74,7 @@
        emacs-auto-yasnippet
        emacs-htmlize
        ))
+      ;emacs-hlinum
       ;emacs-vlf
       ;emacs-super-save
       ;emacs-ivy-historian
