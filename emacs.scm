@@ -88,6 +88,7 @@
                 "emacs-yasnippet-snippets"
                 "emacs-auto-yasnippet"
                 "emacs-htmlize"
+                "emacs-base16-theme"
                 )))
 
 ;;; MANIFEST
