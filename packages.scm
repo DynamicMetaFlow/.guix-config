@@ -1,7 +1,9 @@
 (use-modules (gnu packages)
              (guix profiles)
              (ice-9 match)
-             (ice-9 pretty-print))
+             (ice-9 pretty-print)
+             (guix git-download)
+             (gnu packages emacs-xyz))
 
 
 ;;; HELPER PROCEDURES
@@ -19,8 +21,8 @@
 
 (define packages
   (append (profile-manifest->package-names)
-          (list "alex4"
-                emacs-alert)))
+          (list emacs-alert
+)))
 
 
 ;;; MANIFEST
