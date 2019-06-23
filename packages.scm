@@ -1,8 +1,9 @@
-(use-modules (gnu packages emacs-xyz)
+(use-modules (guix packages)
              (guix profiles)
              (guix git-download)
              (ice-9 match)
-             (ice-9 pretty-print))
+             (ice-9 pretty-print)
+             (gnu packages emacs-xyz))
 
 (use-package-modules emacs)
 
@@ -23,8 +24,7 @@
   (append (profile-manifest->package-names)
           (list "zathura"
                 )))
-;;; EMACS
-;;; ========
+
   (packages->manifest
           (list emacs
                 emacs-guix
@@ -95,8 +95,8 @@
                 emacs-auto-yasnippet
                 emacs-htmlize
                 emacs-base16-theme
-                emacs-alert
-                )))
+                emacs-helper
+                ))
 
 ;;; MANIFEST
 ;;; ========
