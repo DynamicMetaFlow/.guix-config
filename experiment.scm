@@ -19,8 +19,13 @@
 ;;; PACKAGES
 ;;; ========
 
-(define emacs
+(define packages
   (append (profile-manifest->package-names)
+          (list "zathura"
+                )))
+
+(define emacs
+  (packages->manifest
           (list emacs
                 emacs-guix
                 emacs-exwm
@@ -94,4 +99,4 @@
 ;;; MANIFEST
 ;;; ========
 
-  (packages->manifest (map specification->package emacs))
+  (packages->manifest (map specification->package packages))
