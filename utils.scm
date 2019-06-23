@@ -43,15 +43,15 @@
                          :::)))))
 
 (define-packages-macro guix-packages gnu packages)
-(define-packages-macro my-packages Public packages)
+(define-packages-macro my-packages Public user-packages)
 
 (define-syntax-rule (guix-package module-part package)
   "Return PACKAGE from (gnu packages MODULE-PART) module."
   (module-package (gnu packages module-part) package))
 
 (define-syntax-rule (my-package module-part package)
-  "Return PACKAGE from (Public packages MODULE-PART) module."
-  (module-package (Public packages module-part) package))
+  "Return PACKAGE from (Public user-packages MODULE-PART) module."
+  (module-package (Public user-packages module-part) package))
 
 (define (spec->package spec)
   "Like `specification->package' but better."

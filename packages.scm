@@ -22,7 +22,7 @@
 
 ;;; Code:
 
-(define-module (Public packages)
+(define-module (Public user-packages)
   #:use-module (Public utils)
   #:export (build-common-packages
             build-guix-packages
