@@ -6,7 +6,7 @@
 
 * Packages
 Declaring packages to install on user profile
-#+BEGIN_SRC scheme :tangle ./al/guix/packages.scm
+ #+BEGIN_SRC scheme
 ;;; packages.scm --- Guix packages I use
 
 ;; Copyright © 2015–2018 Alex Kost <alezost@gmail.com>
@@ -150,7 +150,7 @@ Declaring packages to install on user profile
  #+END_SRC
 * Utils
 Utilities for personal configuration
-#+BEGIN_SRC scheme :tangle ./al/guix/utils.scm
+#+BEGIN_SRC scheme
 (define-module (al guix utils)
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1)

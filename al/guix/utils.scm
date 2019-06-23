@@ -1,32 +1,11 @@
-(define-module (packages)
-  #:export (misc-packages
-            emacs-packages
-            ))
-
-(define emacs-packages
-  ;; Emacs packages, but not Emacs itself.
-  (specifications->packages
-   "emacs-ivy"
-   ))
-
-(define misc-packages
-  (specifications->packages
-   "git"
-   "curl"
-   "gnupg"
-   "wget"
-   ))
-
-;;; packages.scm ends here
-
-(define-module (utils)
+(define-module (al guix utils)
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-11)
   #:use-module (guix packages)
   #:use-module (guix profiles)
   #:use-module (gnu packages)
-  #:use-module (utils)
+  #:use-module (al utils)
   #:export (lists-of-packages->manifest
             guix-package
             guix-packages
@@ -64,15 +43,15 @@
                          :::)))))
 
 (define-packages-macro guix-packages gnu packages)
-(define-packages-macro my-packages packages)
+(define-packages-macro my-packages al guix packages)
 
 (define-syntax-rule (guix-package module-part package)
   "Return PACKAGE from (gnu packages MODULE-PART) module."
   (module-package (gnu packages module-part) package))
 
 (define-syntax-rule (my-package module-part package)
-  "Return PACKAGE from (packages MODULE-PART) module."
-  (module-package (packages module-part) package))
+  "Return PACKAGE from (al guix packages MODULE-PART) module."
+  (module-package (al guix packages module-part) package))
 
 (define (spec->package spec)
   "Like `specification->package' but better."
@@ -131,4 +110,5 @@ This is a plural form of `specification->package'."
                  (mapconcat identity
                             (append main-flags extra-flags)
                             " ")))
+
 ;;; utils.scm ends here
