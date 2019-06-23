@@ -1,15 +1,10 @@
-(define-module (my-packages)
-  #:export (emacs-packages))
-
 (use-modules (guix packages)
              (guix git-download)
              (gnu packages emacs-xyz))
 
-
 (use-package-modules emacs)
 
-(define emacs-packages
-  (packages->manifest
+(packages->manifest
  (list emacs
        emacs-guix
        emacs-exwm
