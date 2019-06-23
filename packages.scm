@@ -21,7 +21,7 @@
 
 (define packages
   (append (profile-manifest->package-names)
-          (list emacs-alert
+          (list "emacs-alert"
 )))
 
 
