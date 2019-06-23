@@ -133,6 +133,4 @@ Declaring packages to install on user profile
       ;emacs-objed
       ;emacs-hyperbole
       ;emacs-torus
-
-
  #+END_SRC
