@@ -9,7 +9,10 @@ Declaring packages to install on user profile
 #+BEGIN_SRC scheme :tangle ./packages.scm
 (use-modules (guix packages))
 
-(use-package-modules (gnu packages linux emacs))
+(use-package-modules admin emacs linux)
+
+
+
 
 (packages->manifest
  (list emacs
