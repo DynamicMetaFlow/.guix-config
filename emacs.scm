@@ -32,7 +32,7 @@
        emacs-desktop-environment
        emacs-all-the-icons
        emacs-which-key
-       emacs-discovery-my-major-mode
+       emacs-discover-my-major
        emacs-helpful
        emacs-better-defaults
        emacs-hlinum
