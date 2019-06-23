@@ -118,7 +118,12 @@ Declaring packages to install on user profile
 
 * emacs-boon
 #+BEGIN_SRC emacs-lisp
-(define-public emacs-avy
+(use-modules (guix packages)
+	     (guix download)
+	     (guix build-system gnu)
+             (guix build-system emacs)
+	     (guix licenses))
+
   (package
    (name "emacs-boon")
    (version "1.0")
@@ -141,7 +146,7 @@ Declaring packages to install on user profile
     Ergonomic: common commands are easy to type. (See below)
     Lightweight: ~300 loc for its core.
     Good Emacs integration: integrates well with existing Emacs infrastructure and takes advantage of it.")
-   (license license:gpl3+)))
+   (license license:gpl3+))
 
 #+END_SRC
 * Packages to build from source
