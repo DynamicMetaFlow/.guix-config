@@ -1,9 +1,11 @@
-(use-modules (gnu))
+(use-modules (gnu)
+             (gnu packages))
 
-(packages
- (append
-  (list
-   (specification->package
-  "emacs-ivy"))))
+  (packages (append (map specification->package
+                         '(
+                           "htop"
+                           ))
+                    %base-packages))
+
 
 ;;; packages.scm ends here

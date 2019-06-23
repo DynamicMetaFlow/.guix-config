@@ -7,13 +7,15 @@
 * Packages
 Declaring packages to install on user profile
 #+BEGIN_SRC scheme :tangle ./packages.scm
-(use-modules (gnu))
+(use-modules (gnu)
+             (gnu packages))
 
-(packages
- (append
-  (list
-   (specification->package
-  "emacs-ivy"))))
+  (packages (append (map specification->package
+                         '(
+                           "htop"
+                           ))
+                    %base-packages))
+
 
 ;;; packages.scm ends here
  #+END_SRC
