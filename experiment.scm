@@ -94,7 +94,7 @@
                 emacs-yasnippet-snippets
                 emacs-auto-yasnippet
                 emacs-htmlize
-                emacs-keychord
+                emacs-base16-theme
                 )))
 
 ;;; MANIFEST
