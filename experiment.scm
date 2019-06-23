@@ -89,7 +89,7 @@
                 emacs-yasnippet-snippets
                 emacs-auto-yasnippet
                 emacs-htmlize
-                ))
+                )))
 
 ;;; MANIFEST
 ;;; ========
