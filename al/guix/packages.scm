@@ -22,8 +22,8 @@
 
 ;;; Code:
 
-(define-module (al guix packages)
-  #:use-module (al guix utils)
+(define-module (packages)
+  #:use-module (utils)
   #:export (build-common-packages
             build-guix-packages
             emacs-packages
