@@ -67,7 +67,7 @@
        emacs-org-contrib
        emacs-org-pomodoro
        emacs-markdown-mode
-       emacs-nov
+       emacs-nov-el
        emacs-scratch
        emacs-yasnippet
        emacs-yasnippet-snippets
