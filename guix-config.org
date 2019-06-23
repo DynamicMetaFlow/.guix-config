@@ -7,7 +7,7 @@
 Declaring packages to install on user profile
 
 * Emacs
-#+BEGIN_SRC scheme :tangle ./packages.scm
+#+BEGIN_SRC scheme :tangle ./emacs.scm
 (use-modules (gnu packages)
              (guix profiles)
              (ice-9 match)
