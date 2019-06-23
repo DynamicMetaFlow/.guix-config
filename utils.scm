@@ -1,11 +1,11 @@
-(define-module (al guix utils)
+(define-module (Public guix utils)
   #:use-module (ice-9 match)
   #:use-module (srfi srfi-1)
   #:use-module (srfi srfi-11)
   #:use-module (guix packages)
   #:use-module (guix profiles)
   #:use-module (gnu packages)
-  #:use-module (al utils)
+  #:use-module (Public utils)
   #:export (lists-of-packages->manifest
             guix-package
             guix-packages
@@ -43,15 +43,15 @@
                          :::)))))
 
 (define-packages-macro guix-packages gnu packages)
-(define-packages-macro my-packages al guix packages)
+(define-packages-macro my-packages Public guix packages)
 
 (define-syntax-rule (guix-package module-part package)
   "Return PACKAGE from (gnu packages MODULE-PART) module."
   (module-package (gnu packages module-part) package))
 
 (define-syntax-rule (my-package module-part package)
-  "Return PACKAGE from (al guix packages MODULE-PART) module."
-  (module-package (al guix packages module-part) package))
+  "Return PACKAGE from (Public guix packages MODULE-PART) module."
+  (module-package (Public guix packages module-part) package))
 
 (define (spec->package spec)
   "Like `specification->package' but better."
