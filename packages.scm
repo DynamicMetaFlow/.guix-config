@@ -22,8 +22,7 @@
 
 (define packages
   (append (profile-manifest->package-names)
-          (list "zathura"
-                )))
+          (list "zathura")))
 
   (packages->manifest
           (list emacs
@@ -95,7 +94,7 @@
                 emacs-auto-yasnippet
                 emacs-htmlize
                 emacs-base16-theme
-                emacs-helper
+                emacs-alert
                 ))
 
 ;;; MANIFEST
