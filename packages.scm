@@ -1,116 +1,61 @@
-(define-module (Public user-packages)
-  #:use-module (Public utils)
-  #:export (build-common-packages
-            build-guix-packages
-            emacs-packages
-            guile-packages
-            multimedia-packages
-            misc-packages))
+(use-modules (guix packages))
 
-;;; Packages to build things
 
-(define build-common-packages
-  (specifications->packages
-   "autoconf"
-   "automake"
-   "gcc-toolchain"
-   "gettext"
-   "libtool"
-   "make"
-   "pkg-config"
-   "texinfo"))
-
-(define emacs-packages
-  ;; Emacs packages, but not Emacs itself.
-  (specifications->packages
-   "emacs-debbugs"
-   "emacs-edit-indirect"
-   "emacs-elisp-slime-nav"
-   "emacs-erc-hl-nicks"
-   "emacs-flx"
-   "emacs-geiser"
-   "emacs-git-modes"
-   "emacs-google-translate"
-   "emacs-hl-todo"
-   "emacs-hydra"
-   "emacs-ivy"
-   "emacs-markdown-mode"
-   "emacs-package-lint"
-   "emacs-paredit"
-   "emacs-pdf-tools"
-   "emacs-rainbow-mode"
-   "emacs-shift-number"
-   "emacs-smartparens"
-   "emacs-smex"))
-
-(define guile-packages
-  (specifications->packages
-   "guile"
-   "guile-charting"
-   "guile-chickadee"
-   "guile-daemon"
-   "guile-gcrypt"
-   "guile-git"
-   "guile-json"
-   "guile-xosd"
-   "haunt"))
-
-(define multimedia-packages
-  (specifications->packages
-   "ffmpeg"
-   "graphviz"
-   "imagemagick"
-   "mplayer"
-   "mpv"
-   "my-sxiv"
-   "sox"
-   "timidity++"
-   "youtube-dl"
-   "zathura"
-   "zathura-djvu"
-   "zathura-pdf-poppler"))
-
-(define misc-packages
-  (specifications->packages
-   "alsa-utils"
-   "aspell"
-   "aspell-dict-en"
-   "aspell-dict-ru"
-   "baobab"
-   "curl"
-   "dbus"
-   "dunst"
-   "file"
-   "fontconfig"
-   "gdb"
-   "git"
-   "git:send-email"
-   "gnupg"
-   "gtk-engines"                ; standard themes (clearlooks, etc.)
-   "icecat"
-   "iotop"
-   "libnotify"                  ; for 'notify-send'
-   "libxslt"
-   "lm-sensors"
-   "ltrace"
-   "man-db"                     ; to set MANPATH on non-GuixSD
-   "man-pages"
-   "my-emacs"
-   "netcat"
-   "openssh"
-   "pulseaudio"
-   "pavucontrol"
-   "pinentry"
-   "postgresql"
-   "python-wrapper"
-   "rsync"
-   "rtorrent"
-   "sbcl"
-   "sshfs-fuse"
-   "strace"
-   "tidy-html"
-   "unzip"
-   "w3m"
-   "wget"))
-
-;;; packages.scm ends here
+(packages->manifest
+ (list alsa-utils
+       aseprite
+       emacs
+       emacs-better-defaults
+       emacs-elfeed
+       emacs-ido-ubiquitous
+       emacs-js2-mode
+       emacs-markdown-mode
+       emacs-projectile
+       emacs-rainbow-delimiters
+       emacs-smex
+       emacs-web-mode
+       emacs-yaml-mode
+       eog
+       evince
+       file-roller
+       font-adobe-source-han-sans
+       font-dejavu
+       font-inconsolata
+       geda-gaf
+       geiser-next
+       gimp
+       git
+       (list git "send-email")
+       git-manpages
+       gmtp
+       gnome-tweak-tool
+       gnupg
+       guile-2.0
+       icecat
+       inkscape
+       livestreamer
+       magit
+       milkytracker
+       mpd
+       mpdscribble
+       mpv
+       ncmpcpp
+       notmuch
+       obs
+       offlineimap
+       paredit
+       pavucontrol
+       pcb
+       pinentry
+       pwgen
+       screen
+       scrot
+       shepherd
+       skribilo
+       sshfs-fuse
+       strace
+       (list transmission "gui")
+       typo
+       wget
+       xmodmap
+       youtube-dl))
