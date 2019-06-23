@@ -7,6 +7,8 @@
 * Packages
 Declaring packages to install on user profile
 #+BEGIN_SRC scheme :tangle ./packages.scm
+(use-modules (gnu))
+
 (packages
  (append
   (list
