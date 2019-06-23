@@ -23,7 +23,7 @@
 ;;; Code:
 
 (define-module (al guix packages)
-  #:use-module (utils)
+  #:use-module (al guix utils)
   #:export (build-common-packages
             build-guix-packages
             emacs-packages
