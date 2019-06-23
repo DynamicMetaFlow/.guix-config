@@ -23,6 +23,8 @@
   (append (profile-manifest->package-names)
           (list "zathura"
                 )))
+;;; EMACS
+;;; ========
 
 (define emacs
   (packages->manifest
