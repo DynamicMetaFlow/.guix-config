@@ -17,6 +17,10 @@
 ;;; PACKAGES
 ;;; ========
 
+(define packages
+  (append (profile-manifest->package-names)
+        (list "git")))
+
 (define emacs-packages
   (append (profile-manifest->package-names)
           (list "emacs"
@@ -94,4 +98,4 @@
 ;;; MANIFEST
 ;;; ========
 
-(packages->manifest (map specification->package emacs-packages))
+(packages->manifest (map specification->package packages emacs-packages))
