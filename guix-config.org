@@ -8,6 +8,7 @@
 Declaring packages to install on user profile
 #+BEGIN_SRC scheme :tangle ./packages.scm
 (use-modules (guix packages)
+             (guix git-download)
              (gnu packages emacs-xyz))
 
 (use-package-modules emacs)
