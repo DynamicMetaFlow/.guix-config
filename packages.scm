@@ -1,6 +1,6 @@
 (use-modules (guix packages)
              (guix git-download)
-             (gnu packages linux))
+             (gnu packages emacs-xyz))
 
 (use-package-modules emacs)
 
