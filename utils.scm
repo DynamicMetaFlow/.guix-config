@@ -5,7 +5,7 @@
   #:use-module (guix packages)
   #:use-module (guix profiles)
   #:use-module (gnu packages)
-  #:use-module (my utils)
+  #:use-module (my guix utils)
   #:export (lists-of-packages->manifest
             guix-package
             guix-packages
