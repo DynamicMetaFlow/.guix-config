@@ -1,10 +1,10 @@
-(use-modules (gnu packages)
-             (emacs)
+(use-modules (gnu packages emacs-xyz)
              (guix profiles)
              (guix git-download)
              (ice-9 match)
              (ice-9 pretty-print))
 
+(use-package-modules emacs)
 
 ;;; HELPER PROCEDURES
 ;;; =================
