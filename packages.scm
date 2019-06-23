@@ -25,8 +25,6 @@
                 )))
 ;;; EMACS
 ;;; ========
-
-(define emacs
   (packages->manifest
           (list emacs
                 emacs-guix
@@ -104,4 +102,3 @@
 ;;; ========
 
   (packages->manifest (map specification->package packages))
-  (packages->manifest emacs)

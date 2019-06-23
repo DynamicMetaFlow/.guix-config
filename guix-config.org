@@ -35,8 +35,6 @@ Declaring packages to install on user profile
                 )))
 ;;; EMACS
 ;;; ========
-
-(define emacs
   (packages->manifest
           (list emacs
                 emacs-guix
@@ -114,7 +112,6 @@ Declaring packages to install on user profile
 ;;; ========
 
   (packages->manifest (map specification->package packages))
-  (packages->manifest emacs)
 
 #+END_SRC
 * Packages to build from source
