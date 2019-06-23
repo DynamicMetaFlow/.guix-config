@@ -158,7 +158,7 @@ Declaring packages to install on user profile
 
 (define packages
   (append (profile-manifest->package-names)
-          (list "zathura"))
+          (list "zathura")))
 
 
 ;;; MANIFEST

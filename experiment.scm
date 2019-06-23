@@ -19,7 +19,7 @@
 
 (define packages
   (append (profile-manifest->package-names)
-          (list "zathura"))
+          (list "zathura")))
 
 
 ;;; MANIFEST
