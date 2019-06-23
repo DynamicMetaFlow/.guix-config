@@ -14,6 +14,10 @@
   (map manifest-entry-name
        (manifest-entries (profile-manifest %user-profile-directory))))
 
+;;; MANIFEST
+;;; ========
+
+(packages->manifest (map specification->package emacs-packages))
 
 ;;; PACKAGES
 ;;; ========
@@ -32,6 +36,7 @@
                 "emacs-circe"
                 "emacs-pdf-tools"
                 "emacs-elfeed"
+                "emacs-elfeed-org"
                 "emacs-dumb-jump"
                 "emacs-json-mode"
                 "emacs-web-beautify"
@@ -88,11 +93,4 @@
                 "emacs-yasnippet-snippets"
                 "emacs-auto-yasnippet"
                 "emacs-htmlize"
-                "emacs-elfeed-org"
                 )))
-
-
-;;; MANIFEST
-;;; ========
-
-(packages->manifest (map specification->package emacs-packages))
