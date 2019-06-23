@@ -1,4 +1,5 @@
-(use-modules (gnu emacs)
+(use-modules (gnu packages)
+             (emacs)
              (guix profiles)
              (guix git-download)
              (ice-9 match)

@@ -107,7 +107,8 @@ emacs-torus
   #+END_SRC
 * Experiment
 #+BEGIN_SRC scheme :tangle ./experiment.scm
-(use-modules (gnu emacs)
+(use-modules (gnu packages)
+             (emacs)
              (guix profiles)
              (guix git-download)
              (ice-9 match)
