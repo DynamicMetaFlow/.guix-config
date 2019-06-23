@@ -24,11 +24,6 @@ Declaring packages to install on user profile
   (map manifest-entry-name
        (manifest-entries (profile-manifest %user-profile-directory))))
 
-;;; MANIFEST
-;;; ========
-
-(packages->manifest (map specification->package emacs-packages))
-
 ;;; PACKAGES
 ;;; ========
 
@@ -104,6 +99,12 @@ Declaring packages to install on user profile
                 "emacs-auto-yasnippet"
                 "emacs-htmlize"
                 )))
+
+;;; MANIFEST
+;;; ========
+
+(packages->manifest (map specification->package emacs-packages))
+
 #+END_SRC
 * Packages to build from source
 #+BEGIN_SRC text

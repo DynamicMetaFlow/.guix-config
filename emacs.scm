@@ -14,11 +14,6 @@
   (map manifest-entry-name
        (manifest-entries (profile-manifest %user-profile-directory))))
 
-;;; MANIFEST
-;;; ========
-
-(packages->manifest (map specification->package emacs-packages))
-
 ;;; PACKAGES
 ;;; ========
 
@@ -94,3 +89,8 @@
                 "emacs-auto-yasnippet"
                 "emacs-htmlize"
                 )))
+
+;;; MANIFEST
+;;; ========
+
+(packages->manifest (map specification->package emacs-packages))
