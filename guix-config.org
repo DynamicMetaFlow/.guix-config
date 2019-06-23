@@ -1,6 +1,6 @@
 :HIDDEN:
 #+CATEGORY: guix
-#+PROPERTY: header-args :results silent :tangle ./guix-config.scm
+#+PROPERTY: header-args :results silent
 :END:
 #+TITLE: Guix Configuration
 
