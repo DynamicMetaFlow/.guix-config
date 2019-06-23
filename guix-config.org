@@ -10,7 +10,7 @@ Declaring packages to install on user profile
 (use-modules (guix packages)
              (guix git-download))
 
-(use-package-modules admin emacs linux)
+(use-package-modules admin emacs gnu packages linux)
 
 
 
