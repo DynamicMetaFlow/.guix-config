@@ -107,9 +107,10 @@ Declaring packages to install on user profile
 
 ;;; MANIFEST
 ;;; ========
+(packages->manifest (map specification->package packages))
+(packages->manifest (map specification->package emacs-packages))
 
-(packages->manifest (map specification->package emacs-packages)
-                    (map specification->package packages))
+
 
 #+END_SRC
 * Packages to build from source
