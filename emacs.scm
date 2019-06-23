@@ -98,4 +98,5 @@
 ;;; MANIFEST
 ;;; ========
 
-(packages->manifest (map specification->package packages emacs-packages))
+(packages->manifest (map specification->package emacs-packages)
+                    (map specification->package packages))
