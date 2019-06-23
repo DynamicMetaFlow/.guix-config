@@ -5,7 +5,8 @@
 (use-package-modules emacs)
 
 (packages->manifest
- (list emacs
+ (list
+emacs
        emacs-guix
        emacs-exwm
        emacs-xelb
@@ -74,53 +75,3 @@
        emacs-auto-yasnippet
        emacs-htmlize
        ))
-      ;emacs-hlinum
-      ;emacs-vlf
-      ;emacs-super-save
-      ;emacs-ivy-historian
-      ;emacs-swiper
-      ;emacs-counsel
-      ;emacs-deadgrep
-      ;emacs-ivy-xref
-      ;emacs-ivy-hydra
-      ;emacs-ivy-prescient
-      ;emacs-historian
-      ;emacs-flycheck-color-mode-line
-      ;emacs-company-emoji
-      ;emacs-company-try-hard
-      ;emacs-company-prescient
-      ;emacs-gist
-      ;emacs-copy-as-format
-      ;emacs-recentf
-      ;emacs-hideshow
-      ;emacs-outline
-      ;emacs-bicycle
-      ;emacs-org-cliplink
-      ;emacs-org-download
-      ;emacs-org-journal
-      ;emacs-toc-org
-      ;emacs-ox-gfm
-      ;emacs-browse-kill-ring
-      ;emacs-persistent-scratch
-      ;emacs-unkillable-scratch
-      ;dired-k
-      ;dired-hide-dotfiles
-      ;dired-imenu
-      ;dired-hacks-utils
-      ;dired-filter
-      ;dired-avfs
-      ;dired-open
-      ;dired-narrow
-      ;dired-subtree
-      ;dired-collapse
-      ;emacs-buffer-move
-      ;emacs-windmove
-      ;emacs-beacon
-      ;emacs-doom-themes
-      ;emacs-doom-modeline
-      ;emacs-counsel
-      ;emacs-gpastel
-      ;emacs-boon
-      ;emacs-objed
-      ;emacs-hyperbole
-      ;emacs-torus
