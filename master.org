@@ -4,7 +4,7 @@
 * Guix
 ** bin
 *** run-vm
-#+BEGIN_SRC shell :tangle ~/.dotfiles/bin/run-vm.sh
+#+BEGIN_SRC shell :tangle ~/.guix-config/bin/run-vm.sh
 #!/run/current-system/profile/bin/bash
 
 cd $HOME/VMs
@@ -23,7 +23,7 @@ sudo qemu-system-x86_64 \
 #+END_SRC
 ** system configuration
 *** X230
-  #+BEGIN_SRC scheme :tangle ~/.dotfiles/system-configuration/thinkpad-x230.scm
+  #+BEGIN_SRC scheme :tangle ~/.guix-config/system-configuration/thinkpad-x230.scm
  (use-modules
   (gnu)
   (gnu system nss)
@@ -184,7 +184,7 @@ sudo qemu-system-x86_64 \
   #+END_SRC
 ** modules
 *** emacs
-  #+BEGIN_SRC scheme :tangle ~/.dotfiles/modules/emacs.scm
+  #+BEGIN_SRC scheme :tangle ~/.guix-config/modules/emacs.scm
  ;; run this with "guix package -f" to install the emacs configuration
  (use-modules (gnu packages emacs)
               (guix base32)
@@ -314,9 +314,9 @@ sudo qemu-system-x86_64 \
      imenu-anywhere
      use-package
      modalka
-;     doom-modeline
+;     doom-modeline;
 ;     doom-themes
-;     hyperbole
+     hyperbole
      ))
 
  (define (resolve-dependencies names cache)
@@ -390,7 +390,7 @@ sudo qemu-system-x86_64 \
 
   #+END_SRC
 *** utils
-#+BEGIN_SRC scheme :tangle ~/.dotfiles/modules/utils.scm
+#+BEGIN_SRC scheme :tangle ~/.guix-config/modules/utils.scm
 ;;; Adapted from https://github.com/alezost/guile-config/blob/master/modules/al/utils.scm
 
 (define-module (guile-modules utils)
@@ -499,7 +499,7 @@ containing the elements after ELT."
 
 #+END_SRC
 ** manifests
-  #+BEGIN_SRC scheme :tangle ~/.dotfiles/manifests/profile-manifest.scm
+  #+BEGIN_SRC scheme :tangle ~/.guix-config/manifests/profile-manifest.scm
   (specifications->manifest
    '("nss-certs"
      "bash"               ; Get a standard shell
@@ -593,7 +593,7 @@ containing the elements after ELT."
   #+END_SRC
 ** containers
 *** cgit
-#+BEGIN_SRC scheme :tangle ~/.dotfiles/containers/cgit.scm
+#+BEGIN_SRC scheme :tangle ~/.guix-config/containers/cgit.scm
 (define-module (containers cgit))
 
 (use-modules (gnu))

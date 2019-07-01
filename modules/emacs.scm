@@ -127,9 +127,9 @@
      imenu-anywhere
      use-package
      modalka
-;     doom-modeline
+;     doom-modeline;
 ;     doom-themes
-;     hyperbole
+     hyperbole
      ))
 
  (define (resolve-dependencies names cache)
