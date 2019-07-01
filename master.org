@@ -1,0 +1,636 @@
+#+TITLE: Master Configuration
+#+PROPERTY: header-args :results silent
+
+* Guix
+** bin
+*** run-vm
+#+BEGIN_SRC shell :tangle ~/.dotfiles/bin/run-vm.sh
+#!/run/current-system/profile/bin/bash
+
+cd $HOME/VMs
+
+sudo qemu-system-x86_64 \
+     -m 10000 \
+     -smp 8 \
+     -boot d \
+     -enable-kvm \
+     -net nic \
+     -net user \
+     -vga none -device qxl-vga,vgamem_mb=32 \
+     -soundhw ac97 \
+     -hda $IMG
+
+#+END_SRC
+** system configuration
+*** X230
+  #+BEGIN_SRC scheme :tangle ~/.dotfiles/system-configuration/thinkpad-x230.scm
+ (use-modules
+  (gnu)
+  (gnu system nss)
+  (gnu services xorg))
+ (use-service-modules desktop networking ssh xorg)
+ (use-package-modules
+  admin
+  bash
+  certs
+  compression
+  curl
+  emacs
+  fonts
+  file
+  gawk
+  guile
+  nano
+  gnome
+  gnupg
+  gnuzilla
+  less
+  linux
+  lxde
+  man
+  password-utils
+  pciutils
+  screen
+  ssh
+  suckless
+  texinfo
+  tmux
+  tor
+  version-control
+  video
+  wget
+  wm
+  xdisorg
+  xfce
+  xorg
+  zile
+  ghostscript
+  display-managers
+  gstreamer
+  pulseaudio)
+
+ (operating-system
+  (host-name "X230")
+  (locale "en_US.utf8")
+  (timezone "America/New_York")
+  (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+  (bootloader (bootloader-configuration
+               (bootloader grub-efi-bootloader)
+               (target "/boot/sda")
+               (keyboard-layout keyboard-layout)))
+  (file-systems (cons (file-system
+                       (device (file-system-label "root"))
+                       (mount-point "/")
+                       (type "ext4"))
+                      %base-file-systems))
+  (users (cons (user-account
+                (name "alexander")
+                (comment "Alexander Soto")
+                (group "users")
+                (home-directory "/home/alexander")
+                (supplementary-groups '("wheel"
+                                        "audio" "video")))
+               %base-user-accounts))
+
+  ;; Globally installed packages.
+  ;; The barebones programs needed to get work done
+  (packages
+   (list
+    nss-certs
+    bash               ; Get a standard shell
+    bash-completion    ; Get proper tab completion
+    bzip2              ; Support bz2
+    unzip              ; For extracting and viewing files in .zip archives
+    coreutils          ; Make bash useful
+    curl               ; Web scripting
+    diffutils          ; For diffing files
+    e2fsprogs          ; EXT filesystem manipulation tools
+    eudev              ; Userspace hotplug daemon
+    file               ; File type identification utility
+    findutils          ; Be able to leverage find
+    font-dejavu        ; Baseline fonts
+    font-inconsolata
+    font-liberation
+    font-terminus
+    font-ubuntu
+    gs-fonts
+    font-dejavu
+    font-gnu-freefont-ttf
+    font-adobe-source-code-pro
+    gvfs               ; Userspace virtual file system for GIO
+    gawk               ; Awk is rather handy
+    git                ; Primary version control
+    gnupg              ; Encryption
+    grep               ; For searching for strings
+ ;   guile-2.2          ; XXX: We don't use (canonical-package guile-2.2) here because that would create a collision in the global profile.
+    gzip               ; Support gz
+    htop               ; System performance
+    slim              ; Simple Login Manager
+    inetutils          ; For hostname
+    info-reader        ; the standalone Info reader (no Perl)
+    iproute            ; Core network routing tools
+    isc-dhcp           ; For DHCP
+    iw                 ; New standard tool for configuring wireless devices
+    kbd                ; Keyboard and key map utilities
+    kmod               ; Get 'insmod' & co. from kmod, not module-init-tools, since udev  already depends on it anyway.
+    less               ; No explaination required
+    lzip               ; Support lz
+    man-db             ; Enable manpages
+    man-pages          ; Linux man pages
+    net-tools          ; XXX: remove when Inetutils suffices
+    nss-certs          ; for HTTPS access
+    openssh            ; ssh client
+    patch              ; Patch files are useful
+    pciutils           ; For manipulating PCI devices (lspci and setpci)
+    pcmanfm            ; File browser
+    pinentry-gtk2      ; gnupg agent
+    procps             ; /proc process tools (vmstat, ps, w, etc)
+    psmisc             ; More /proc process tools
+    rfkill             ; Even more wireless tools
+    rxvt-unicode       ; Terminal
+    sed                ; Search and replace
+    shadow             ; User management tools (and passwd)
+    sysfsutils         ; System Utilities Based on Sysfs
+    sudo               ; The 'sudo' command is already in %SETUID-PROGRAMS, but we also want the other commands and the man pages.
+    tar                ; Packing of filges
+    tig                ; git diff viewing
+    tor                ; Anonymity
+    torsocks           ; Wrapping alternate apps with tor
+    tree               ; Handy file directory map generator
+    usbutils           ; For manipulating USB devices (lsusb)
+    util-linux         ; For dmesg
+    wget               ; Downloader
+    which              ; Find full path
+    wireless-tools     ; wireless-tools is deprecated in favor of iw, but it's still what  many people are familiar with, so keep it around.
+    xz                 ; Support xz
+    zile               ; In the event emacs breaks
+    emacs              ; gui text editor
+    which              ; A utility to show the full path of commands
+    nano               ; Pico editor clone with enhancements
+    arandr             ; Front-end to XRandR
+    autorandr          ; Automatically sets up monitors
+    xrandr             ; Configure screens
+    ))
+
+
+
+
+  ;; System services: add sshd and DHCP to the base services.
+  (services (append (list (service dhcp-client-service-type)
+                          (service openssh-service-type
+                                   (openssh-configuration
+                                    (port-number 2222))))
+                    %base-services)))
+  #+END_SRC
+** modules
+*** emacs
+  #+BEGIN_SRC scheme :tangle ~/.dotfiles/modules/emacs.scm
+ ;; run this with "guix package -f" to install the emacs configuration
+ (use-modules (gnu packages emacs)
+              (guix base32)
+              (guix build-system emacs)
+              (guix build-system trivial)
+              (guix download)
+              (guix http-client)
+              (guix import elpa)
+              (guix packages)
+              (gnu packages)
+              (guix store)
+              (gcrypt hash)
+              (ice-9 match)
+              (ice-9 pretty-print)
+              (srfi srfi-26))
+
+ (define emacs-standard-library?
+   (@@ (guix import elpa) emacs-standard-library?))
+ (define elpa-name->package-name
+   (@@ (guix import elpa) elpa-name->package-name))
+ (define fetch-elpa-package
+   (@@ (guix import elpa) fetch-elpa-package))
+ (define elpa-dependencies->names
+   (@@ (guix import elpa) elpa-dependencies->names))
+ (define <elpa-package>
+   (@@ (guix import elpa) <elpa-package>))
+
+ (define inbuilt-packages
+   '("emacs"
+     "json"))
+
+ (define packages
+   '(
+     elfeed
+     org-download
+     guix
+     exwm
+     xelb
+     exwm-edit
+     hydra
+     transient
+     howm
+     emms
+     circe
+     pdf-tools
+     elfeed-org
+     dumb-jump
+     json-mode
+     web-beautify
+     web-mode
+     async
+     dash
+     f
+     s
+     ht
+     a
+     request
+     exec-path-from-shell
+     desktop-environment
+     all-the-icons
+     which-key
+     discover-my-major
+     helpful
+     better-defaults
+     visual-fill-column
+     ace-window
+     transpose-frame
+     dired-hacks
+     dired-rsync
+     avy
+     goto-chg
+     expand-region
+     smartparens
+     edit-indirect
+     flycheck
+     wgrep
+     anzu
+     counsel-projectile
+     ivy
+     ivy-rich
+     smex
+     company
+     company-quickhelp
+     prescient
+     crux
+     keyfreq
+     elmacro
+     projectile
+     ibuffer-projectile
+     magit
+     git-timemachine
+     gitpatch
+     org
+     org-contrib
+     org-pomodoro
+     markdown-mode
+     nov-el
+     scratch-el
+     yasnippet
+     yasnippet-snippets
+     auto-yasnippet
+     htmlize
+     base16-theme
+     spinner
+     general
+     multiple-cursors
+     org-journal
+     toc-org
+     ox-gfm
+     browse-kill-ring
+     persistent-scratch
+     unkillable-scratch
+     torus
+     objed
+     org-cliplink
+     buffer-move
+     copy-as-format
+     bicycle
+     historian
+     company-prescient
+     flycheck-color-mode-line
+     dired-hide-dotfiles
+     ivy-historian
+     vlf
+     ivy-xref
+     deadgrep
+     imenu-anywhere
+     use-package
+     modalka
+;     doom-modeline
+;     doom-themes
+;     hyperbole
+     ))
+
+ (define (resolve-dependencies names cache)
+   (filter (compose not (cut eq? <> #f) cadr)
+           (map (lambda (name)
+                  (list (elpa-name->package-name name)
+                        (elpa-name->package name cache)))
+                names)))
+
+ (define (elpa-package->package pkg pkg-cache)
+   "Turn an elpa package into an actual package."
+   (match pkg
+     (($ <elpa-package> name version inputs synopsis kind home-page description source-url)
+      (package
+       (name (elpa-name->package-name name))
+       (version version)
+       (source (origin
+                (method url-fetch)
+                (uri source-url)
+                (sha256
+                 (base32
+                  (bytevector->nix-base32-string
+                   (file-sha256
+                    (with-store store
+                                (download-to-store store source-url))))))))
+       (build-system emacs-build-system)
+       (propagated-inputs
+        (resolve-dependencies
+         (elpa-dependencies->names inputs)
+         pkg-cache))
+       (home-page home-page)
+       (synopsis synopsis)
+       (description description)
+       (license #f)))))
+
+ (define (fetch-pkg name)
+   (or (fetch-elpa-package name 'melpa)
+       (fetch-elpa-package name 'melpa-stable)
+       (fetch-elpa-package name 'gnu)))
+
+ (define (elpa-name->package name pkg-cache)
+   (if (or (emacs-standard-library? name)
+           (member name inbuilt-packages))
+       #f
+       (or (match (find-packages-by-name (elpa-name->package-name name))
+             [(package . _) package]
+             [_ #f])
+           (hash-ref pkg-cache name #f)
+           (let ((package (elpa-package->package (fetch-pkg name) pkg-cache)))
+             (cond
+              (package
+               (hash-set! pkg-cache name package)
+               package)
+              (else
+               (error "Can't download library: " name)))))))
+
+ (let ((cache (make-hash-table))
+       (dependencies (map symbol->string packages)))
+   (package
+    (name "emacs-configuration")
+    (version "0.0.0")
+    (source #f)
+    (build-system trivial-build-system)
+    (arguments `(#:builder (mkdir %output)))
+    (propagated-inputs
+     (resolve-dependencies dependencies cache))
+    (synopsis "")
+    (description "")
+    (license #f)
+    (home-page "")))
+
+  #+END_SRC
+*** utils
+#+BEGIN_SRC scheme :tangle ~/.dotfiles/modules/utils.scm
+;;; Adapted from https://github.com/alezost/guile-config/blob/master/modules/al/utils.scm
+
+(define-module (guile-modules utils)
+  #:use-module (ice-9 match)
+  #:use-module (srfi srfi-1)
+  #:use-module (srfi srfi-11)
+  #:use-module (srfi srfi-26)
+  #:export (with-no-output
+            define-delayed
+            memoize
+            push!
+            set-locale
+            mapconcat
+            comma-separated
+            build-file-name
+            min-string
+            replace
+            split
+            split-path))
+
+(define-syntax-rule (define-delayed name expression)
+  "Define NAME thunk that will evaluate EXPRESSION, remember and return
+its value on a first call and will return this value on subsequent
+calls."
+  (define name
+    (let ((value (delay expression)))
+      (lambda () (force value)))))
+
+(define (memoize proc)
+  "Return a memoizing version of PROC."
+  (let ((cache (make-hash-table)))
+    (lambda args
+      (let ((results (hash-ref cache args)))
+        (if results
+            (apply values results)
+            (let ((results (call-with-values
+                               (lambda () (apply proc args))
+                             list)))
+              (hash-set! cache args results)
+              (apply values results)))))))
+
+(define-syntax-rule (push! elt lst)
+  "Add ELT to LST."
+  (set! lst (cons elt lst)))
+
+(define-syntax-rule (with-no-output body ...)
+  "Do not display any output while running BODY."
+  (let ((null (%make-void-port "w")))
+    (parameterize ((current-output-port  null)
+                   (current-error-port   null)
+                   (current-warning-port null))
+      body ...)))
+
+(define* (set-locale #:optional (locale ""))
+  "Call (setlocale LC_ALL LOCALE) and ignore errors."
+  (catch #t
+    (lambda _ (setlocale LC_ALL locale))
+    (lambda (_ . args)
+      (apply display-error #f (current-error-port) args))))
+
+(define* (mapconcat proc lst #:optional (separator ""))
+  "Apply PROC to each element of LST and concatenate the result strings
+into a single string using SEPARATOR."
+  (match lst
+    (() "")
+    ((elt . rest)
+     (fold (lambda (elt res)
+             (string-append res separator (proc elt)))
+           (proc elt)
+           rest))))
+
+(define (comma-separated . strings)
+  "Return string by concatenating STRINGS with commas."
+  (mapconcat identity strings ","))
+
+(define (build-file-name . file-parts)
+  "Return file name by concatenating FILE-PARTS with slashes."
+  (mapconcat identity file-parts "/"))
+
+(define (min-string . strings)
+  "Like 'min' but performed on STRINGS.
+Return #f if STRINGS are not specified."
+  (reduce (lambda (cur min)
+            (if (string< cur min) cur min))
+          #f
+          strings))
+
+(define (replace pred new lst)
+  "Replace element of LST matching PRED with NEW element."
+  (cons new (remove pred lst)))
+
+(define (split lst elt)
+  "Return two values, a list containing the elements of the list LST
+that appear before the first occurence of the object ELT and a list
+containing the elements after ELT."
+  (let-values (((head tail)
+                (break (cut string=? elt <>) lst)))
+    (values head
+            (match tail
+              (() '())
+              ((_ rest ...) rest)))))
+
+(define* (split-path #:optional (path (getenv "PATH")) (separator #\:))
+  "Split PATH string into a list of substrings with SEPARATOR."
+  (string-tokenize path (char-set-complement (char-set separator))))
+
+#+END_SRC
+** manifests
+  #+BEGIN_SRC scheme :tangle ~/.dotfiles/manifests/profile-manifest.scm
+  (specifications->manifest
+   '("nss-certs"
+     "bash"               ; Get a standard shell
+     "bash-completion"    ; Get proper tab completion
+     "bzip2"              ; Support bz2
+     "unzip"              ; For extracting and viewing files in .zip archives
+     "coreutils"          ; Make bash useful
+     "curl"               ; Web scripting
+     "diffutils"          ; For diffing files
+     "e2fsprogs"          ; EXT filesystem manipulation tools
+     "eudev"              ; Userspace hotplug daemon
+     "file"               ; File type identification utility
+     "findutils"          ; Be able to leverage find
+     "font-dejavu"        ; Baseline fonts
+     "font-inconsolata"
+     "font-liberation"
+     "font-terminus"
+     "font-ubuntu"
+     "gs-fonts"
+     "font-dejavu"
+     "font-gnu-freefont-ttf"
+     "font-adobe-source-code-pro"
+     "fontconfig"
+     "password-store"
+     "gawk"               ; Awk is rather handy
+     "git"                ; Primary version control
+     "scrot"
+     "xautolock"
+     "gnupg"              ; Encryption
+     "grep"               ; For searching for strings
+     "gzip"               ; Support gz
+     "htop"               ; System performance
+     "slim"               ; Simple Login Manager
+     "inetutils"          ; For hostname
+     "info-reader"        ; the standalone Info reader (no Perl)
+     "isc-dhcp"           ; For DHCP
+     "iw"                 ; New standard tool for configuring wireless devices
+     "kbd"                ; Keyboard and key map utilities
+     "kmod"               ; Get 'insmod' & co. from kmod, not module-init-tools, since udev  already depends on it anyway.
+     "less"               ; No explaination required
+     "lzip"               ; Support lz
+     "man-db"             ; Enable manpages
+     "man-pages"          ; Linux man pages
+     "net-tools"          ; XXX: remove when Inetutils suffices
+     "nss-certs"          ; for HTTPS access
+     "openssh"            ; ssh client
+     "patch"              ; Patch files are useful
+     "pciutils"           ; For manipulating PCI devices (lspci and setpci)
+     "pcmanfm"            ; File browser
+     "pinentry-gtk2"      ; gnupg agent
+     "procps"             ; /proc process tools (vmstat, ps, w, etc)
+     "psmisc"             ; More /proc process tools
+     "rfkill"             ; Even more wireless tools
+     "rxvt-unicode"       ; Terminal
+     "sed"                ; Search and replace
+     "shadow"             ; User management tools (and passwd)
+     "sysfsutils"         ; System Utilities Based on Sysfs
+     "sudo"               ; The 'sudo' command is already in %SETUID-PROGRAMS, but we also want the other commands and the man pages.
+     "tar"                ; Packing of filges
+     "tig"                ; git diff viewing
+     "tor"                ; Anonymity
+     "torsocks"           ; Wrapping alternate apps with tor
+     "tree"               ; Handy file directory map generator
+     "usbutils"           ; For manipulating USB devices (lsusb)
+     "util-linux"         ; For dmesg
+     "wget"               ; Downloader
+     "which"              ; Find full path
+     "wireless-tools"     ; wireless-tools is deprecated in favor of iw, but it's still what  many people are familiar with, so keep it around.
+     "xz"                 ; Support xz
+     "zile"               ; In the event emacs breaks
+     "emacs"              ; gui text editor
+     "nano"               ; Pico editor clone with enhancements
+     "arandr"             ; Front-end to XRandR
+     "autorandr"          ; Automatically sets up monitors
+     "xrandr"             ; Configure screens
+     "qemu"
+     "icecat"
+     "icecat"             ; Web Browser
+     "sbcl-next"          ; Customizable Lisp-based Browser
+     "redshift"           ; Adjust blue light
+     "gstreamer"          ; Open source multimedia framework
+     "gst-plugins-base"   ; GStreamer plug-ins and elements
+     "gst-plugins-good"
+     "gst-plugins-bad"
+     "gst-libav"
+     "pulseaudio"         ; Sound server
+     "pavucontrol"        ; PulseAudio Volume Control
+     "alsa-utils"         ; Alternative sound support
+     ))
+
+  #+END_SRC
+** containers
+*** cgit
+#+BEGIN_SRC scheme :tangle ~/.dotfiles/containers/cgit.scm
+(define-module (containers cgit))
+
+(use-modules (gnu))
+(use-service-modules networking ssh cgit)
+(use-package-modules screen)
+
+(operating-system
+ (host-name "cgit")
+ (timezone "America/Chicago")
+ (locale "en_US.utf8")
+
+ (bootloader (bootloader-configuration
+	      (bootloader grub-bootloader)
+	      (target "/dev/sdX")))
+ (file-systems (cons (file-system
+		      (device (file-system-label "my-root"))
+		      (mount-point "/")
+		      (type "ext4"))
+		     %base-file-systems))
+
+ (users (cons (user-account
+	       (name "cgit")
+	       (comment "cgit")
+	       (group "users")
+	       (supplementary-groups '("wheel"
+				       "audio"
+				       "video")))
+	      %base-user-accounts))
+
+ (packages (cons screen %base-packages))
+
+ (services (append
+	    (list (service dhcp-client-service-type)
+		  (service openssh-service-type
+			   (openssh-configuration
+			    (port-number 2222)))
+		  (service cgit-service-type))
+	    %base-services)))
+
+#+END_SRC
