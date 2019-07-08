@@ -1,5 +1,5 @@
  ;; run this with "guix package -f" to install the emacs configuration
- (use-modules (gnu packages emacs)
+(use-modules (gnu packages emacs)
               (guix base32)
               (guix build-system emacs)
               (guix build-system trivial)
@@ -31,23 +31,44 @@
 
  (define packages
    '(
-     elfeed
-     org-download
      guix
-     exwm
-     xelb
-     exwm-edit
-     hydra
-     transient
-     howm
+     company
+     company-prescient
+     company-quickhelp
+     ivy
+     ivy-rich
+     swiper
+     persistent-scratch
+     unkillable-scratch
+     scratch-el
+     visual-fill-column
+     modalka
+     which-key
+     outshine
+     prescient
+     undo-tree
+     projectile
+     counsel-projectile
      emms
-     circe
      pdf-tools
+     elfeed
      elfeed-org
-     dumb-jump
-     json-mode
-     web-beautify
-     web-mode
+     dired-hide-dotfiles
+     buffer-move
+     magit
+     git-timemachine
+     howm
+     writeroom
+     flycheck
+     flycheck-color-mode-line
+     markdown-mode
+     helpful
+     transient
+     general
+     hydra
+     exwm
+     exwm-edit
+     xelb
      async
      dash
      f
@@ -57,79 +78,35 @@
      request
      exec-path-from-shell
      desktop-environment
-     all-the-icons
-     which-key
+     circe
      discover-my-major
-     helpful
-     better-defaults
-     visual-fill-column
      ace-window
-     transpose-frame
-     dired-hacks
-     dired-rsync
-     avy
-     goto-chg
-     expand-region
-     smartparens
-     edit-indirect
-     flycheck
-     wgrep
-     anzu
-     counsel-projectile
-     ivy
-     ivy-rich
-     smex
-     company
-     company-quickhelp
-     prescient
-     crux
-     keyfreq
-     elmacro
-     projectile
-     ibuffer-projectile
-     magit
-     git-timemachine
-     gitpatch
      org
      org-contrib
-     org-pomodoro
-     markdown-mode
-     nov-el
-     scratch-el
+     org-journal
+     org-cliplink
+     toc-org
+     better-defaults
+     elmacro
+     page-break-lines
+     dired-sidebar
+     emr
+     pass
+     poporg
+     slime
+     use-package
+     base16-theme
      yasnippet
      yasnippet-snippets
      auto-yasnippet
      htmlize
-     base16-theme
-     spinner
-     general
-     multiple-cursors
-     org-journal
-     toc-org
-     ox-gfm
-     browse-kill-ring
-     persistent-scratch
-     unkillable-scratch
-     torus
      objed
-     org-cliplink
-     buffer-move
-     copy-as-format
-     bicycle
+     torus
+     smartparens
+     goto-last-change
+     goto-last-point
      historian
-     company-prescient
-     flycheck-color-mode-line
-     dired-hide-dotfiles
      ivy-historian
-     vlf
-     ivy-xref
-     deadgrep
-     imenu-anywhere
-     use-package
-     modalka
-;     doom-modeline;
-;     doom-themes
-     hyperbole
      ))
 
  (define (resolve-dependencies names cache)
