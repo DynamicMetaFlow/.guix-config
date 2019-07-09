@@ -668,13 +668,14 @@ general-purpose blocker. uBlock Origin blocks ads through its support
 of the Adblock Plus filter syntax. uBlock Origin extends the syntax
 and is designed to work with custom rules and filters.")
       (license license:gpl3+))))
+
 (use-modules (gnu packages golang)
              (guix build-system go))
 (define-public go-hugo
-  (let ((commit "579004178b575b4253112fcb23eef002345028c2"))
+  (let ((commit "7611078daef32306ab31fe360db9895cdd3626d3"))
     (package (inherit go)
       (name "go-hugo")
-      (version (git-version "0.55.4" "1" commit))
+      (version (git-version "0.55.6" "1" commit))
       (source (origin (method git-fetch)
                       (uri (git-reference
                             (url "https://github.com/gohugoio/hugo")
@@ -703,6 +704,8 @@ and renders them into a full HTML website. It relies on Markdown
 files with front matter for metadata, and you can run it from any
 directory.")
       (license license:asl2.0))))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; packages.scm ends here
