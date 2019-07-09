@@ -1,4 +1,4 @@
-;;; packages.scm --- nly's custom packages
+;;; packages.scm --- DynamicMetaFlow's custom packages
 ;;
 ;; Description: Guix packages not upstreamed to guix proper
 ;; Author: Amar Singh
