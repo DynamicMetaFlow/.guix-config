@@ -1,4 +1,5 @@
- ;; run this with "guix package -f" to install the emacs configuration
+(define-module
+  (DynamicMetaFlow modules))
 (use-modules (gnu packages emacs)
               (guix base32)
               (guix build-system emacs)
