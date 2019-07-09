@@ -78,6 +78,7 @@
           (type "ext4")
           (dependencies mapped-devices))
          %base-file-systems))
+ (firmware (cons* %base-firmware))
  (host-name "X230")
  (users (cons* (user-account
                 (name "alexander")
@@ -167,6 +168,7 @@
          font-dejavu
          font-gnu-freefont-ttf
          font-adobe-source-code-pro
+         lshw
 	 %base-packages))
 
  (services

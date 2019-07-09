@@ -85,6 +85,7 @@
      org-contrib
      org-journal
      org-cliplink
+     org-download
      toc-org
      better-defaults
      elmacro
@@ -107,6 +108,11 @@
      goto-last-point
      historian
      ivy-historian
+     deadgrep
+     dumb-jump
+     browse-kill-ring
+     anzu
+     load-theme-buffer-local
      ))
 
  (define (resolve-dependencies names cache)
