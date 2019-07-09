@@ -1,8 +1,9 @@
 * To use these packages
-  Add this snippet to your `$HOME/.config/guix/channels.scm`
-  #+begin_src scheme :tangle yes
-    (list (channel
-           (name 'DynamicMetaFlow)
-           (url "https://github.com/DynamicMetaFlow/.guix-config.git")
-           (branch "master")))
+Add this snippet to your `$HOME/.config/guix/channels.scm`
+  #+begin_src scheme :tangle ~/.config/guix/channels.scm
+(cons (channel
+       (name 'modules)
+       (url "https://github.com/DynamicMetaFlow/guix-config.git"))
+      %default-channels)
+
   #+end_src
