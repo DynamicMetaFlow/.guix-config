@@ -682,7 +682,7 @@ and is designed to work with custom rules and filters.")
                             (commit commit)))
                       (file-name (git-file-name name version))
                       (sha256 (base32
-                               "0hbkl8dhhdic0admrkvlp1h1bmfrrwfnvipx27clyk0f88jcvb7y"))))
+                               "06yqpcs55gvv1sr368as8k6vy0n5c2fpq7smbfjd8mp0icb31q13"))))
       (home-page "https://gohugo.io/")
       (build-system go-build-system)
       (inputs
